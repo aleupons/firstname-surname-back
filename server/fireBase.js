@@ -6,8 +6,8 @@ const { duplicateKeyError } = require("./errors");
 const { applicationDefault } = require("firebase-admin/app");
 
 admin.initializeApp({
-  // credential: admin.credential.cert(serviceAccount),
-  credential: applicationDefault(),
+  // credential: applicationDefault(),
+  credential: admin.credential.cert(serviceAccount),
   storageBucket: "firstname-surname.appspot.com",
 });
 const bucket = admin.storage().bucket();
