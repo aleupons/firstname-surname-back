@@ -1,11 +1,13 @@
 const path = require("path");
 const admin = require("firebase-admin");
-const serviceAccount = require("../firstname-surname-firebase-adminsdk-c5ozy-431b9475bc.json");
+const serviceAccount = require("../firstname-surname-firebase-adminsdk-c5ozy-04c91fe21b.json");
 const { generateError } = require("./errors");
 const { duplicateKeyError } = require("./errors");
+const { applicationDefault } = require("firebase-admin/app");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  // credential: admin.credential.cert(serviceAccount),
+  credential: applicationDefault(),
   storageBucket: "firstname-surname.appspot.com",
 });
 const bucket = admin.storage().bucket();
