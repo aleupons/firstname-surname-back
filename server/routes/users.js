@@ -91,6 +91,7 @@ router.get("/my-user", authorization(false), async (req, res, next) => {
 
 router.post(
   "/new-user",
+  authorization(true),
   checkSchema(userSchema),
   validationErrors,
   async (req, res, next) => {
