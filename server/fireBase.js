@@ -3,7 +3,6 @@ const admin = require("firebase-admin");
 const serviceAccount = require("../firstname-surname-firebase-adminsdk-c5ozy-04c91fe21b.json");
 const { generateError } = require("./errors");
 const { duplicateKeyError } = require("./errors");
-const { applicationDefault } = require("firebase-admin/app");
 
 admin.initializeApp({
   // credential: applicationDefault(),
@@ -48,4 +47,24 @@ const fireBase = async (req, res, next, manageData, register, id, subfolder) => 
   }
 };
 
-module.exports = fireBase;
+const fireBaseDel = async (req, res, next, manageData, register, id, subfolder) => {
+  try {
+    const deletedData = await manageData(id);
+    const fileUrl = deletedData.photoUrl;
+    const data = bucket.file(fileUrl);
+    const exists = await data.exists();
+    if (!exists[0]) {
+      const newError = generateError("L'arxiu no existeix", 400);
+      throw newError;
+    }
+    await data.delete();
+    res.status(201).json(deletedData);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  fireBase,
+  fireBaseDel
+};

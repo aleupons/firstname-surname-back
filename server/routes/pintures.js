@@ -14,7 +14,7 @@ const {
 const { validationErrors, generateError } = require("../errors");
 const { duplicateKeyError } = require("../errors");
 const { authorization } = require("../authorization");
-const fireBase = require("../fireBase");
+const { fireBase, fireBaseDel } = require("../fireBase");
 const pinturaSchema = require("../checkSchemas/pinturaSchema");
 
 const router = express.Router();
@@ -133,6 +133,7 @@ router.delete(
     const { id } = req.params;
     try {
       const pintura = await deletePintura(id);
+      // fireBaseDel(req, res, next, deletePintura, pintura, id, "Pintures/");
       res.json(pintura);
     } catch (error) {
       next(error);
