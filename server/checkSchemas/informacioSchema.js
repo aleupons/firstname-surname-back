@@ -16,19 +16,16 @@ const informacioSchema = {
     welcome: {
       notEmpty: true,
     },
-    title: {
+    section1: {
       notEmpty: true,
     },
-    title2: {
+    section2: {
       notEmpty: true,
     },
-    title3: {
+    section3: {
       notEmpty: true,
     },
-    title4: {
-      notEmpty: true,
-    },
-    title5: {
+    home: {
       notEmpty: true,
     },
   };

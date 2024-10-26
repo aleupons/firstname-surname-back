@@ -14,23 +14,19 @@ const InformacioSchema = new Schema(
       type: String,
       required: true,
     },
-    title: {
+    section1: {
       type: String,
       required: true,
     },
-    title2: {
+    section2: {
       type: String,
       required: true,
     },
-    title3: {
+    section3: {
       type: String,
       required: true,
     },
-    title4: {
-      type: String,
-      required: true,
-    },
-    title5: {
+    home: {
       type: String,
       required: true,
     },
