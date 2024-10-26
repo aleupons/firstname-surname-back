@@ -133,7 +133,7 @@ router.delete(
     const { id } = req.params;
     try {
       const pintura = await deletePintura(id);
-      // fireBaseDel(req, res, next, deletePintura, pintura, id, "Pintures/");
+      await fireBaseDel(pintura.photoUrl);
       res.json(pintura);
     } catch (error) {
       next(error);

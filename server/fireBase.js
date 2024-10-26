@@ -47,22 +47,28 @@ const fireBase = async (req, res, next, manageData, register, id, subfolder) => 
   }
 };
 
-const fireBaseDel = async (req, res, next, manageData, register, id, subfolder) => {
+const fireBaseDel = async (photoUrl) => {
   try {
-    const deletedData = await manageData(id);
-    const fileUrl = deletedData.photoUrl;
-    const data = bucket.file(fileUrl);
+    const data = bucket.file(getImageNameFromUrl(photoUrl));
     const exists = await data.exists();
     if (!exists[0]) {
-      const newError = generateError("L'arxiu no existeix", 400);
-      throw newError;
+      return "L'arxiu no existeix";
     }
     await data.delete();
     res.status(201).json(deletedData);
   } catch (error) {
-    next(error);
+    return error;
   }
 };
+
+const getImageNameFromUrl = (url) => {
+  const regex = /\/o\/(.*?)\?alt=media/;
+  const matches = url.match(regex);
+  if (matches && matches[1]) {
+    return decodeURIComponent(matches[1]);
+  }
+  return "";
+}
 
 module.exports = {
   fireBase,

@@ -14,7 +14,7 @@ const {
 const { validationErrors, generateError } = require("../errors");
 const { duplicateKeyError } = require("../errors");
 const { authorization } = require("../authorization");
-const fireBase = require("../fireBase");
+const { fireBase, fireBaseDel } = require("../fireBase");
 const dibuixSchema = require("../checkSchemas/dibuixSchema");
 
 const router = express.Router();
@@ -133,6 +133,7 @@ router.delete(
     const { id } = req.params;
     try {
       const dibuix = await deleteDibuix(id);
+      await fireBaseDel(dibuix.photoUrl);
       res.json(dibuix);
     } catch (error) {
       next(error);

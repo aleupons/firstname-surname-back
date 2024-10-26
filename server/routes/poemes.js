@@ -14,7 +14,7 @@ const {
 const { validationErrors, generateError } = require("../errors");
 const { duplicateKeyError } = require("../errors");
 const { authorization } = require("../authorization");
-const fireBase = require("../fireBase");
+const { fireBase, fireBaseDel } = require("../fireBase");
 const poemaSchema = require("../checkSchemas/poemaSchema");
 
 const router = express.Router();
@@ -133,6 +133,7 @@ router.delete(
     const { id } = req.params;
     try {
       const poema = await deletePoema(id);
+      await fireBaseDel(poema.photoUrl);
       res.json(poema);
     } catch (error) {
       next(error);
