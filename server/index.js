@@ -10,6 +10,7 @@ const dibuixosRoute = require("./routes/dibuixos");
 const pinturesRoute = require("./routes/pintures");
 const poemesRoute = require("./routes/poemes");
 const informacioRoute = require("./routes/informacions");
+const cansoRoute = require("./routes/cansons");
 const { error404, generalError } = require("./errors");
 const { authorization } = require("./authorization");
 
@@ -47,6 +48,7 @@ const serverStart = () => {
   app.use("/pintures", pinturesRoute);
   app.use("/poemes", poemesRoute);
   app.use("/informacions", informacioRoute);
+  app.use("/cansons", cansoRoute);
 
   app.use(error404);
   app.use(generalError);

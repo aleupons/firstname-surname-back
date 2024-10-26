@@ -1,39 +1,39 @@
 const { check, checkSchema } = require("express-validator");
 const express = require("express");
-const debug = require("debug")("firstnamesurname:server:routes:informacions");
+const debug = require("debug")("firstnamesurname:server:routes:cansons");
 const multer = require("multer");
 const {
-  listInformacions,
-  showInformacio,
-  createInformacio,
-  modifyInformacio,
-  deleteInformacio,
-} = require("../../db/controllers/informacions");
+  listCansons,
+  showCanso,
+  createCanso,
+  modifyCanso,
+  deleteCanso,
+} = require("../../db/controllers/cansons");
 const { validationErrors, generateError } = require("../errors");
 const { duplicateKeyError } = require("../errors");
 const { authorization } = require("../authorization");
-const informacioSchema = require("../checkSchemas/informacioSchema");
+const cansoSchema = require("../checkSchemas/cansoSchema");
 
 const router = express.Router();
 
 router.get("/list", async (req, res, next) => {
   try {
-    const informacionsList = await listInformacions();
-    res.json(informacionsList);
+    const cansonsList = await listCansons();
+    res.json(cansonsList);
   } catch (error) {
     next(error);
   }
 });
 
 router.get(
-  "/informacio/:id",
+  "/cansons/:id",
   check("id", "Id incorrecta").isMongoId(),
   validationErrors,
   async (req, res, next) => {
     const { id } = req.params;
     try {
-      const informacio = await showInformacio(id);
-      res.json(informacio);
+      const canso = await showCanso(id);
+      res.json(canso);
     } catch (error) {
       next(error);
     }
@@ -41,15 +41,15 @@ router.get(
 );
 
 router.post(
-  "/new-informacio",
+  "/new-canso",
   authorization(true),
-  checkSchema(informacioSchema),
+  checkSchema(cansoSchema),
   validationErrors,
   async (req, res, next) => {
-    const informacio = req.body;
+    const canso = req.body;
     try {
-      const newInformacio = await createInformacio(informacio);
-      res.json(newInformacio);
+      const newCanso = await createInformacio(canso);
+      res.json(newCanso);
     } catch (error) {
       next(error);
     }
@@ -57,17 +57,17 @@ router.post(
 );
 
 router.put(
-  "/informacio/:id",
+  "/canso/:id",
   authorization(true),
   check("id", "Id incorrecta").isMongoId(),
-  checkSchema(informacioSchema),
+  checkSchema(cansoSchema),
   validationErrors,
   async (req, res, next) => {
     const { id } = req.params;
-    const informacio = req.body;
+    const canso = req.body;
     try {
-      const newInformacio = await modifyInformacio(id, informacio);
-      res.json(newInformacio);
+      const newCanso = await modifyCanso(id, canso);
+      res.json(newCanso);
     } catch (error) {
       duplicateKeyError(req, res, next, error);
     }
@@ -75,15 +75,15 @@ router.put(
 );
 
 router.delete(
-  "/informacio/:id",
+  "/canso/:id",
   authorization(true),
   check("id", "Id incorrecta").isMongoId(),
   validationErrors,
   async (req, res, next) => {
     const { id } = req.params;
     try {
-      const informacio = await deleteInformacio(id);
-      res.json(informacio);
+      const canso = await deleteCanso(id);
+      res.json(canso);
     } catch (error) {
       next(error);
     }
