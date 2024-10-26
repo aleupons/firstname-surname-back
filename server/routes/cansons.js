@@ -48,7 +48,7 @@ router.post(
   async (req, res, next) => {
     const canso = req.body;
     try {
-      const newCanso = await createInformacio(canso);
+      const newCanso = await createCanso(canso);
       res.json(newCanso);
     } catch (error) {
       next(error);
