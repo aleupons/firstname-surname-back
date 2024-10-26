@@ -1,5 +1,8 @@
 const cansoSchema = {
   name: {
+    optional: true,
+  },
+  iframe: {
     notEmpty: true,
   },
   spotify: {

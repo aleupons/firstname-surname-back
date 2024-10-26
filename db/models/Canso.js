@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const CansoSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: false,
+    },
     iframe: {
       type: String,
       required: true,

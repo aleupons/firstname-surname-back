@@ -1,7 +1,6 @@
 const { check, checkSchema } = require("express-validator");
 const express = require("express");
 const debug = require("debug")("firstnamesurname:server:routes:informacions");
-const multer = require("multer");
 const {
   listInformacions,
   showInformacio,

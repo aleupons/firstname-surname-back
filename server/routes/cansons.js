@@ -1,7 +1,6 @@
 const { check, checkSchema } = require("express-validator");
 const express = require("express");
 const debug = require("debug")("firstnamesurname:server:routes:cansons");
-const multer = require("multer");
 const {
   listCansons,
   showCanso,
@@ -26,7 +25,7 @@ router.get("/list", async (req, res, next) => {
 });
 
 router.get(
-  "/cansons/:id",
+  "/canso/:id",
   check("id", "Id incorrecta").isMongoId(),
   validationErrors,
   async (req, res, next) => {
