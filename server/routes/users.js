@@ -27,7 +27,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const { userId, admin } = await loginUser(username, password);
     const token = jwt.sign({ userId, admin }, process.env.SECRET_JWT, {
-      expiresIn: "1d",
+      expiresIn: "1m",
     });
     res.json({ token, userId });
   } catch (error) {
