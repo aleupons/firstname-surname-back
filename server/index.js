@@ -23,10 +23,14 @@ const serverStart = () => {
 
   /* Dev CORS */
   app.use((req, res, next) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://firstname-surname-front.onrender.com"
-    );
+    const allowedOrigins = ["https://firstname-surname-front.onrender.com", "http://localhost:5000"];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader(
+        "Access-Control-Allow-Origin",
+        origin
+      );
+    }
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
