@@ -23,7 +23,7 @@ const serverStart = () => {
 
   /* Dev CORS */
   app.use((req, res, next) => {
-    const allowedOrigins = ["https://firstname-surname-front.onrender.com", "http://localhost:5000"];
+    const allowedOrigins = ["https://firstname-surname-front.onrender.com", "http://localhost:3000"];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
       res.setHeader(
